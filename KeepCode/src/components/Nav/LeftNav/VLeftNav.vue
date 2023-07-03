@@ -1,6 +1,6 @@
 <template>
   <div class="left">
-    <img src="/leftNav/logo.svg" alt="logo" />
+    <img class="left-logo" src="/leftNav/logo.svg" alt="logo" />
     <VMenuItem v-for="item in fakeData" :key="item.id" :item="item" />
   </div>
 </template>
@@ -47,7 +47,6 @@ const fakeData = [
   grid-area: LeftNav;
 
   height: 100vh;
-  padding-top: 15px;
 
   display: flex;
   flex-direction: column;
@@ -55,5 +54,8 @@ const fakeData = [
   gap: 20px;
 
   background-color: #458afb;
+  &-logo {
+    padding-top: 15px;
+  }
 }
 </style>

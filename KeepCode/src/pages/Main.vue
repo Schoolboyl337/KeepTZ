@@ -3,7 +3,6 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
 import VUserInfo from "../components/VUserInfo.vue";
 </script>
 
