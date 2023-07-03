@@ -3,22 +3,42 @@
     <div class="top-breadcrumbs">
       Главная / Ученики / <span class="active">Документы</span>
     </div>
-    <div>Главная / Ученики / Документы</div>
+    <div class="top-buttons">
+      <VMenuBtn v-for="item in fakeData" :key="item.id" :item="item" />
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import VMenuBtn from "./VMenuBtn.vue";
+const fakeData = [
+  {
+    id: 1,
+    text: "Name_user",
+    url: "/avatar.png",
+  },
+  {
+    id: 2,
+    text: null,
+    url: "/log-out.svg",
+  },
+  {
+    id: 3,
+    text: null,
+    url: "/settings.svg",
+  },
+];
 </script>
 
 <style lang="scss" scoped>
 .top {
   grid-area: TopNav;
 
-  padding: 28px 90px;
+  padding: 0 90px;
 
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   background-color: #fff;
 
@@ -32,6 +52,11 @@ import { ref } from "vue";
     & .active {
       color: #86939c;
     }
+  }
+
+  &-buttons {
+    display: flex;
+    gap: 33px;
   }
 }
 </style>
