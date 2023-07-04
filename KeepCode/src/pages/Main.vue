@@ -1,14 +1,23 @@
 <template>
-  <VUserInfo></VUserInfo>
+  <div class="main">
+    <VUserInfo></VUserInfo>
+    <VFilter></VFilter>
+    <VCatalog></VCatalog>
+  </div>
 </template>
 
 <script setup>
 import VUserInfo from "../components/VUserInfo.vue";
+import VFilter from "../components/VFilter.vue";
+import VCatalog from "../components/Catalog/VCatalog.vue";
 </script>
 
 <style lang="scss" scoped>
-.mid {
+.main {
   grid-area: Main;
-  color: #888;
+  display: flex;
+  gap: 30px;
+  padding: 26px 90px;
+  flex-direction: column;
 }
 </style>
