@@ -1,33 +1,30 @@
 <template>
   <div class="v-catalog">
     <VCatalogCard
-      v-for="item in CardsArray"
+      v-for="item in items"
       :title="item.title"
+      :id="item.id"
+      :date="item.range"
       :body="item.body"
-    ></VCatalogCard>
+      @remove="up"
+    />
   </div>
 </template>
 
 <script setup>
 import VCatalogCard from "./VCatalogCard.vue";
-import { ref, onMounted, computed } from "vue";
-
-const cards = ref([]);
-const CardsArray = computed(() => (cards.value ? cards.value.slice(0, 5) : []));
-
-onMounted(() => {
-  fetchCards();
+import { defineEmits } from "vue";
+defineProps({
+  items: {
+    type: Array,
+    default: () => [],
+  },
 });
 
-async function fetchCards() {
-  try {
-    const response = await fetch("https://jsonplaceholder.typicode.com/posts/");
-    const data = await response.json();
-    cards.value = data;
-  } catch (error) {
-    console.error("Ошибка при запросе:", error);
-  }
-}
+const emit = defineEmits(["remove"]);
+const up = (id) => {
+  emit("remove", id);
+};
 </script>
 
 <style lang="scss" scoped>

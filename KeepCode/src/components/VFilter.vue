@@ -1,6 +1,13 @@
 <template>
   <div class="v-filter">
     <div>
+      <select @change="sort" v-model="option">
+        <option disabled value="">Сортировать по алфавиту:</option>
+        <option value="up">A - Z</option>
+        <option value="down">Z - A</option>
+      </select>
+    </div>
+    <div>
       <button @click="openModal" class="v-filter-button">
         добавить документ
       </button>
@@ -9,17 +16,22 @@
 </template>
 
 <script setup>
-const emit = defineEmits(["openModal"]);
-
+import { ref, defineEmits } from "vue";
+const emit = defineEmits(["openModal", "sort"]);
+const option = ref("");
 const openModal = () => {
   emit("openModal");
+};
+const sort = () => {
+  emit("sort", option);
 };
 </script>
 
 <style lang="scss" scoped>
 .v-filter {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
 
   &-button {
     padding: 18px 10px;

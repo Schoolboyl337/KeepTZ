@@ -6,7 +6,7 @@
       </div>
       <div class="info-container-left">
         <div class="info-container-left-block">
-          <div class="info-container-left-name">Абрамова Екатерина</div>
+          <h1 class="info-container-left-name">Абрамова Екатерина</h1>
           <img src="/userInfo/sex.png" alt="sex" class="info-container-sex" />
         </div>
         <div class="info-container-left-block">

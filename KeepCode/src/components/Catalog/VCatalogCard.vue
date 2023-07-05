@@ -13,16 +13,16 @@
         </div>
       </div>
       <div class="v-catalog-card-container-left-date">
-        04.07.2021 - 04.07.2022
+        {{ finalDate }}
       </div>
       <div class="v-catalog-card-container-left-icons">
         <a href="#">
           <img src="/edit.svg" alt="icon" />
         </a>
-        <a href="#">
+        <a @click="removeCard" href="#">
           <img src="/bin.svg" alt="icon" />
         </a>
-        <a href="#">
+        <a @click="removeCard" href="#">
           <img src="/bin.svg" alt="icon" />
         </a>
       </div>
@@ -34,7 +34,7 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, defineEmits } from "vue";
 const props = defineProps({
   title: {
     type: String,
@@ -44,9 +44,35 @@ const props = defineProps({
     type: String,
     default: null,
   },
+  id: {
+    type: Number,
+    required: true,
+  },
+  date: {
+    type: Object,
+    default: () => ({}),
+  },
 });
 
-const isActive = computed(() => props.title.length >= 30);
+const emit = defineEmits(["remove"]);
+
+const removeCard = () => {
+  const id = props.id;
+  emit("remove", id);
+};
+
+const finalDate = computed(() => {
+  if (props.date) {
+    if (props.date.rangeStart && props.date.rangeEnd) {
+      return `${props.date.rangeStart.replace(/-/g, ".")} - 
+      ${props.date.rangeEnd.replace(/-/g, ".")}`;
+    } else if (props.date.rangeStart) {
+      return `${props.date.rangeStart.replace(/-/g, ".")}`;
+    }
+  }
+});
+
+const isActive = computed(() => props?.title?.length >= 30);
 </script>
 
 <style lang="scss" scoped>
