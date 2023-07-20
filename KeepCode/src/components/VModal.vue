@@ -192,11 +192,9 @@ const onSubmit = () => {
     background: #fff;
     box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.1);
 
-    @media (prefers-color-scheme: dark) {
-      :root {
-        background-color: black;
-        color: white;
-      }
+    @media (prefers-color-scheme: dark) { 
+      background-color: black;
+      color: white;
     }
   }
 
@@ -279,6 +277,10 @@ const onSubmit = () => {
         flex-direction: column;
         align-items: center;
         padding: 25px;
+
+        @media (prefers-color-scheme: dark) {
+          color: #000;
+        }
 
         & span {
           text-decoration: underline;
