@@ -179,6 +179,8 @@ const onSubmit = () => {
   align-items: center;
   font-size: 18px;
 
+
+
   &-container {
     display: flex;
     flex-direction: column;
@@ -189,6 +191,13 @@ const onSubmit = () => {
 
     background: #fff;
     box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.1);
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        background-color: black;
+        color: white;
+      }
+    }
   }
 
   & span {
@@ -198,11 +207,12 @@ const onSubmit = () => {
   & input[type="text"] {
     width: 100%;
     border: 0;
-    padding-top: 12px;
     border-bottom: 1px solid #b9c2c9;
     &::placeholder {
-      position: relative;
-      bottom: 12px;
+      @media (prefers-color-scheme: dark) {
+        color: white;
+        padding-left: 5px;
+      }
     }
 
     &:focus-visible {
