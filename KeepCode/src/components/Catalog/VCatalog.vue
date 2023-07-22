@@ -30,11 +30,7 @@ const up = (id) => {
 <style lang="scss" scoped>
 .v-catalog {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 30px;
-
-  @media screen and (max-width: 1500px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
 }
 </style>

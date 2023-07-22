@@ -80,6 +80,7 @@ const isActive = computed(() => props?.title?.length >= 30);
   display: flex;
   justify-content: space-between;
   padding: 20px;
+  gap: 10px;
   align-items: center;
 
   border-radius: 10px;

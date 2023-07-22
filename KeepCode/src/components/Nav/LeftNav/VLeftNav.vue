@@ -52,6 +52,7 @@ const fakeData = [
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  padding: 0 12px;
 
   background-color: #458afb;
   &-logo {

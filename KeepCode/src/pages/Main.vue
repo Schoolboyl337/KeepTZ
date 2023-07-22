@@ -75,6 +75,7 @@ const filter = (option) => {
   display: flex;
   gap: 30px;
   padding: 26px 90px;
+  background-color: #F2F5F8;
   flex-direction: column;
 }
 </style>

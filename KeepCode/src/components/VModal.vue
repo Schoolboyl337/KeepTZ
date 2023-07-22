@@ -191,11 +191,6 @@ const onSubmit = () => {
 
     background: #fff;
     box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.1);
-
-    @media (prefers-color-scheme: dark) { 
-      background-color: black;
-      color: white;
-    }
   }
 
   & span {

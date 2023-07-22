@@ -1,13 +1,15 @@
 <template>
   <div class="info">
     <div class="info-container">
-      <div>
+      <div class="info-container-avatar">
         <img src="/userInfo/avatar.png" alt="avatar" />
       </div>
       <div class="info-container-left">
         <div class="info-container-left-block">
-          <h1 class="info-container-left-name">Абрамова Екатерина</h1>
-          <img src="/userInfo/sex.png" alt="sex" class="info-container-sex" />
+          <div class="info-container-left-name">Абрамова Екатерина</div>
+          <div>
+            <img src="/userInfo/sex.png" alt="sex" class="info-container-sex" />
+          </div>
         </div>
         <div class="info-container-left-block">
           <div class="socials">
@@ -80,14 +82,20 @@ const fakeData = [
   border-radius: 10px;
   &-container {
     padding: 20px;
+    gap: 36px;
 
     display: flex;
     justify-content: space-between;
+
+    &-avatar {
+      align-self: center;
+    }
 
     &-left {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      gap: 40px;
 
       &-block {
         display: flex;
@@ -112,6 +120,9 @@ const fakeData = [
         -webkit-text-stroke: 1px black;
         font-size: 36px;
         font-weight: 700;
+        @media screen and (max-width: 1800px) {
+          width: min-content;
+        }
       }
     }
 
@@ -137,7 +148,11 @@ const fakeData = [
       &-block {
         grid-template-columns: 1fr 1fr;
         display: grid;
-        align-content: space-between;
+        gap: 30px 10px;
+
+        @media screen and (max-width: 1900px) {
+          align-content: space-between;
+        }
 
         &-text {
           color: #0d2839;
