@@ -1,8 +1,25 @@
 <template>
   <div class="v-filter">
-    <div>
-      <select @change="sort" v-model="option">
-        <option disabled value="">Сортировать по алфавиту:</option>
+    <div class="v-filter-sort">
+      <label for="type"> Тип документа </label>
+      <select id="type" @change="sortByStatus" v-model="status">
+        <option disabled value="">Не выбрано</option>
+        <option value="up">A - Z</option>
+        <option value="down">Z - A</option>
+      </select>
+    </div>
+    <div class="v-filter-sort">
+      <label for="status"> Статус </label>
+      <select id="status" @change="sortByType" v-model="type">
+        <option disabled value="">Не выбрано</option>
+        <option value="active">Активные</option>
+        <option value="inactive">Не Активные</option>
+      </select>
+    </div>
+    <div class="v-filter-sort">
+      <label for="filter"> Сортировать по </label>
+      <select id="filter" @change="sortByAlp" v-model="filter">
+        <option disabled value="">Алфaвиту</option>
         <option value="up">A - Z</option>
         <option value="down">Z - A</option>
       </select>
@@ -17,13 +34,23 @@
 
 <script setup>
 import { ref, defineEmits } from "vue";
-const emit = defineEmits(["openModal", "sort"]);
-const option = ref("");
+const emit = defineEmits(["openModal", "sortByAlp", "sortByType", "sortByStatus"]);
+const type = ref("");
+const status = ref("");
+const filter = ref("");
 const openModal = () => {
   emit("openModal");
 };
-const sort = () => {
-  emit("sort", option);
+const sortByAlp = () => {
+  emit("sortByAlp", filter);
+};
+
+const sortByType = () => {
+  emit("sortByType", type);
+};
+
+const sortByStatus = () => {
+  emit("sortByStatus", status);
 };
 </script>
 
@@ -32,6 +59,28 @@ const sort = () => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-family: Alegreya Sans;
+
+  &-sort {
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+
+    & label {
+      color: #86939C;
+    }
+
+    & select {
+      color: #458AFB;
+      border: none;
+      background-color: #F2F5F8;
+      font-size: 18px;
+      font-family: Alegreya Sans;
+      &:focus-visible {
+        outline: none;
+      }
+    }
+  }
 
   &-button {
     padding: 18px 10px;

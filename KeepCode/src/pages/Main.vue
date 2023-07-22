@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <VUserInfo></VUserInfo>
-    <VFilter @sort="filter" @open-modal="toggleModal"></VFilter>
+    <VFilter @sortByAlp="sortByAlp" @sortByType="sortByType" @sortByStatus="filter" @open-modal="toggleModal"></VFilter>
     <VModal v-if="isOpen" @toggle-modal="toggleModal" @on-sumbit="addCard" />
     <VCatalog @remove="deleteCard" :items="cards"></VCatalog>
   </div>
@@ -43,15 +43,18 @@ const toggleModal = () => {
 const addCard = (card) => {
   card.id = 1 + cards.value.length;
   cards.value = [...cards.value, card];
-  filter();
+  sortByAlp();
+  sortByType();
 };
 
 const deleteCard = (id) => {
   cards.value = cards.value.filter((item) => item.id !== id);
-  filter();
+  sortByAlp();
+  sortByType();
 };
 
-const filter = (option) => {
+const sortByAlp = (option) => {
+  
   if (option?.value) {
     filterOption.value = option;
     if (option.value === "up") {
@@ -67,6 +70,14 @@ const filter = (option) => {
     }
   }
 };
+
+const sortByType = (option) => {
+  if (option?.value) {
+    option.value === "active" 
+    ? cards.value = cards.value.filter( item => item.title?.length >= 30 )
+    : cards.value = cards.value.filter( item => item.title?.length < 30 );
+  }
+}
 </script>
 
 <style lang="scss" scoped>
