@@ -8,15 +8,15 @@
       <div class="v-modal-type">
         <div class="v-modal-type-text">Тип документа:<span>*</span></div>
         <div class="v-modal-type-radiobuttons">
-          <div>
+          <div class="radio">
             <input type="radio" id="1" value="1" v-model="document.type" />
             <label for="1">Договор</label>
           </div>
-          <div>
+          <div class="radio">
             <input type="radio" id="2" value="2" v-model="document.type" />
             <label for="2">Справка</label>
           </div>
-          <div>
+          <div class="radio">
             <input type="radio" id="3" value="3" v-model="document.type" />
             <label for="3">Другое</label>
           </div>
@@ -51,7 +51,7 @@
         </div>
       </div>
       <div class="v-modal-checkboxes">
-        <div>
+        <div class="checkbox">
           <input
             type="checkbox"
             id="alert"
@@ -60,7 +60,7 @@
           <label for="alert">Оповещать об окончании </label>
         </div>
 
-        <div>
+        <div class="checkbox">
           <input
             type="checkbox"
             id="create"
@@ -211,6 +211,104 @@ const onSubmit = () => {
     &:focus-visible {
       outline: none;
       border-bottom: 2px solid #7d848a;
+    }
+  }
+
+  & .radio {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    position: relative;
+
+    input[type="radio"] {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
+
+    input[type="radio"]::before {
+      content: '';
+      display: inline-block;
+      width: 20px; 
+      height: 20px;
+      border-radius: 50%; 
+      border: 1px solid #B9C2C9; 
+    }
+
+    input[type="radio"]::after {
+      content: "";
+      position: absolute;
+      top: 8px;
+      left: 6px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: transparent;
+    }
+
+    input[type="radio"]:checked::after {
+      background-color: #458AFB;
+    }
+
+    input[type="radio"]:checked::before {
+      border: 1px solid #458AFB; 
+    }
+
+    input[type="radio"]:hover::before {
+      border-color: #666; 
+    }
+  }
+  & .checkbox {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    position: relative;
+
+    input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
+
+    input[type="checkbox"]::before {
+      content: '';
+      display: inline-block;
+      width: 20px; 
+      height: 20px;
+      border: 1px solid #B9C2C9; 
+    }
+
+    input[type="checkbox"]::after {
+      content: "";
+      position: absolute;
+      top: 8px;
+      left: 6px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: transparent;
+    }
+    
+    input[type="checkbox"]:checked::after {
+      content: "";
+      position: absolute;
+      top: 4px;
+      left: 7px;
+      width: 6px;
+      height: 14px;
+      border: 2px solid #fff;
+      border-top: none;
+      border-left: none;
+      transform: rotate(45deg); 
+    }
+
+    input[type="checkbox"]:checked::before {
+      background-color: #458AFB;
+      border: 1px solid #458AFB; 
+    }
+
+    input[type="checkbox"]:hover::before {
+      border-color: #666; 
     }
   }
 
