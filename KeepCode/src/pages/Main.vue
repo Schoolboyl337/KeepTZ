@@ -3,7 +3,7 @@
     <VUserInfo></VUserInfo>
     <VFilter @sortByAlp="sortByAlp" @sortByType="sortByType" @sortByStatus="filter" @open-modal="toggleModal"></VFilter>
     <VModal v-if="isOpen" @toggle-modal="toggleModal" @on-sumbit="addCard" />
-    <VCatalog @remove="deleteCard" :items="cards"></VCatalog>
+    <VCatalog @remove="deleteCard" :items="finalArray"></VCatalog>
   </div>
 </template>
 
@@ -15,6 +15,7 @@ import VModal from "../components/VModal.vue";
 import { ref, onMounted } from "vue";
 
 const cards = ref([]);
+const finalArray = ref([]);
 const isOpen = ref(false);
 const filterOption = ref("up");
 
@@ -30,6 +31,7 @@ async function fetchCards() {
     );
     const data = await response.json();
     cards.value = data;
+    finalArray.value = [...cards.value];
   } catch (error) {
     console.error("Ошибка при запросе:", error);
   } finally {
@@ -41,14 +43,14 @@ const toggleModal = () => {
 };
 
 const addCard = (card) => {
-  card.id = 1 + cards.value.length;
-  cards.value = [...cards.value, card];
+  card.id = 1 + finalArray.value.length;
+  finalArray.value = [...cards.value, card];
   sortByAlp();
   sortByType();
 };
 
 const deleteCard = (id) => {
-  cards.value = cards.value.filter((item) => item.id !== id);
+  finalArray.value = finalArray.value.filter((item) => item.id !== id);
   sortByAlp();
   sortByType();
 };
@@ -58,24 +60,27 @@ const sortByAlp = (option) => {
   if (option?.value) {
     filterOption.value = option;
     if (option.value === "up") {
-      cards.value = cards.value.sort((a, b) => a.title.localeCompare(b.title));
+      finalArray.value = finalArray.value.sort((a, b) => a.title.localeCompare(b.title));
     } else {
-      cards.value = cards.value.sort((a, b) => b.title.localeCompare(a.title));
+      finalArray.value = finalArray.value.sort((a, b) => b.title.localeCompare(a.title));
     }
   } else {
     if (filterOption.value === "up") {
-      cards.value = cards.value.sort((a, b) => a.title.localeCompare(b.title));
+      finalArray.value = finalArray.value.sort((a, b) => a.title.localeCompare(b.title));
     } else {
-      cards.value = cards.value.sort((a, b) => b.title.localeCompare(a.title));
+      finalArray.value = finalArray.value.sort((a, b) => b.title.localeCompare(a.title));
     }
   }
 };
 
 const sortByType = (option) => {
   if (option?.value) {
+    if(option.value === "all") {
+      return finalArray.value = cards.value
+    } 
     option.value === "active" 
-    ? cards.value = cards.value.filter( item => item.title?.length >= 30 )
-    : cards.value = cards.value.filter( item => item.title?.length < 30 );
+    ? finalArray.value = cards.value.filter( item => item.title?.length >= 30 )
+    : finalArray.value = cards.value.filter( item => item.title?.length < 30 );
   }
 }
 </script>

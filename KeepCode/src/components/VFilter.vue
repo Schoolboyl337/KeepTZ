@@ -12,6 +12,7 @@
       <label for="status"> Статус </label>
       <select id="status" @change="sortByType" v-model="type">
         <option disabled value="">Не выбрано</option>
+        <option value="all">Все</option>
         <option value="active">Активные</option>
         <option value="inactive">Не Активные</option>
       </select>
